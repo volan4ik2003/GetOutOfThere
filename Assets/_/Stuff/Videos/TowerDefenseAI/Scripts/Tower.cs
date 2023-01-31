@@ -42,7 +42,7 @@ public class Tower : MonoBehaviour {
         if (shootTimer <= 0f) {
             shootTimer = shootTimerMax;
 
-            Enemy enemy = GetClosestEnemy();
+            EnemyController enemy = GetClosestEnemy();
             if (enemy != null) {
                 // Enemy in range!
                 ProjectileArrow.Create(projectileShootFromPosition, enemy, Random.Range(damageAmount - 5, damageAmount + 5));
@@ -50,8 +50,8 @@ public class Tower : MonoBehaviour {
         }
     }
 
-    private Enemy GetClosestEnemy() {
-        return Enemy.GetClosestEnemy(transform.position, range);
+    private EnemyController GetClosestEnemy() {
+        return EnemyController.GetClosestEnemy(transform.position, range);
     }
 
     public float GetRange() {

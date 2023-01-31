@@ -17,17 +17,17 @@ using CodeMonkey.Utils;
 
 public class ProjectileArrow : MonoBehaviour {
 
-    public static void Create(Vector3 spawnPosition, Enemy enemy, int damageAmount) {
+    public static void Create(Vector3 spawnPosition, EnemyController enemy, int damageAmount) {
         Transform arrowTransform = Instantiate(GameAssets.i.pfProjectileArrow, spawnPosition, Quaternion.identity);
 
         ProjectileArrow projectileArrow = arrowTransform.GetComponent<ProjectileArrow>();
         projectileArrow.Setup(enemy, damageAmount);
     }
 
-    private Enemy enemy;
+    private EnemyController enemy;
     private int damageAmount;
 
-    private void Setup(Enemy enemy, int damageAmount) {
+    private void Setup(EnemyController enemy, int damageAmount) {
         this.enemy = enemy;
         this.damageAmount = damageAmount;
     }

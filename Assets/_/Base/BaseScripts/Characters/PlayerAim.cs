@@ -16,7 +16,7 @@ using UnityEngine;
 using V_AnimationSystem;
 using CodeMonkey.Utils;
 
-public class PlayerAim : MonoBehaviour, Enemy.IEnemyTargetable, EnemyHandler.IEnemyTargetable, EnemyAim.IEnemyTargetable {
+public class PlayerAim : MonoBehaviour, EnemyController.IEnemyTargetable, EnemyHandler.IEnemyTargetable, EnemyAim.IEnemyTargetable {
     
     public static PlayerAim instance;
 
@@ -97,7 +97,7 @@ public class PlayerAim : MonoBehaviour, Enemy.IEnemyTargetable, EnemyHandler.IEn
         return healthSystem.IsDead();
     }
 
-    public void Damage(Enemy enemy) { }
+    public void Damage(EnemyController enemy) { }
 
     public void Damage(EnemyHandler enemy) { }
 

@@ -16,7 +16,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using CodeMonkey.Utils;
 
-public class Player : MonoBehaviour, Enemy.IEnemyTargetable {
+public class Player : MonoBehaviour, EnemyController.IEnemyTargetable {
 
     public static Player Instance { get; private set; }
 
@@ -128,7 +128,7 @@ public class Player : MonoBehaviour, Enemy.IEnemyTargetable {
         return transform.position;
     }
 
-    public void Damage(Enemy attacker) {
+    public void Damage(EnemyController attacker) {
         Vector3 bloodDir = (GetPosition() - attacker.GetPosition()).normalized;
         Blood_Handler.SpawnBlood(GetPosition(), bloodDir);
     }
