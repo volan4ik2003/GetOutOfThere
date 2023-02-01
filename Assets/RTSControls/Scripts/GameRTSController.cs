@@ -63,17 +63,26 @@ public class GameRTSController : MonoBehaviour {
         }
 
         if (Input.GetMouseButtonDown(1)) {
-            // Right Mouse Button Pressed
-            Vector3 moveToPosition = UtilsClass.GetMouseWorldPosition();
+            // Right Mouse Button Pressed 
 
-            List<Vector3> targetPositionList = GetPositionListAround(moveToPosition, new float[] { 10f, 20f, 30f }, new int[] { 5, 10, 20 });
+            Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
-            int targetPositionListIndex = 0;
+           
 
-            foreach (UnitRTS unitRTS in selectedUnitRTSList) {
-                unitRTS.MoveTo(targetPositionList[targetPositionListIndex]);
-                targetPositionListIndex = (targetPositionListIndex + 1) % targetPositionList.Count;
+            
+            foreach (UnitRTS unitRTS in selectedUnitRTSList)
+            {
+                 unitRTS.lightningBolt.endPoint = worldPosition;
+                 unitRTS.lightningBolt.FireOnce();
             }
+            //Vector3 moveToPosition = UtilsClass.GetMouseWorldPosition();
+
+            //List<Vector3> targetPositionList = GetPositionListAround(moveToPosition, new float[] { 10f, 20f, 30f }, new int[] { 5, 10, 20 });
+
+            //int targetPositionListIndex = 0;
+
+
         }
     }
 

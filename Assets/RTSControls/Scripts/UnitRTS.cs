@@ -6,6 +6,7 @@ public class UnitRTS : MonoBehaviour {
 
     private GameObject selectedGameObject;
     private IMovePosition movePosition;
+    public LightningBolt2D lightningBolt;
 
     private void Awake() {
         selectedGameObject = transform.Find("Selected").gameObject;
