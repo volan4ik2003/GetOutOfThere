@@ -9,33 +9,98 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Vector2 panLimit;
     [SerializeField] private Camera cam;
     [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] private float camOrthSizeMax = 67f, camOrthSizeMin = 10f;
+    [SerializeField] private float TopCamLimit = 120f, downCamLimit = 5f, leftCamLimit = -120f, rightCamLimit = 120f;
+    float horBound;
+    float vertBound;
+    float leftBound, rightBound, upBound, downBound;
+
+    private void Start()
+    {
+        cam.orthographicSize = camOrthSizeMin + 0.1f;
+        
+    }
 
     void Update()
     {
+        vertBound = cam.orthographicSize;
+        horBound = cam.orthographicSize / Screen.height * Screen.width;
+        leftBound = transform.position.x - horBound;
+        rightBound = transform.position.x + horBound;
+        upBound = transform.position.y + vertBound;
+        downBound = transform.position.y - vertBound;
+
+        Debug.Log(rightBound);
+
         Vector3 pos = transform.position;
 
-        if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+        if (upBound < TopCamLimit)
+        {
+            if (Input.mousePosition.y >= Screen.height - panBorderThickness)
+            {
+                pos.y += panSpeed * Time.deltaTime;
+            }
+        }
+        else
+        { 
+            pos.y -= panSpeed * Time.deltaTime;
+        }
+
+        if (downBound > downCamLimit)
+        {
+            if (Input.mousePosition.y < panBorderThickness)
+            {
+                pos.y -= panSpeed * Time.deltaTime;
+            }
+        }
+        else 
         { 
             pos.y += panSpeed * Time.deltaTime;
         }
-        if (Input.mousePosition.y < panBorderThickness)
+
+        if (leftBound > leftCamLimit)
         {
-            pos.y -= panSpeed * Time.deltaTime;
+            if (Input.mousePosition.x >= Screen.width - panBorderThickness)
+            {
+                pos.x += panSpeed * Time.deltaTime;
+            }
         }
-        if (Input.mousePosition.x >= Screen.width - panBorderThickness)
-        {
+        else {
             pos.x += panSpeed * Time.deltaTime;
         }
-        if (Input.mousePosition.x < panBorderThickness)
+
+        if (rightBound < rightCamLimit)
         {
+            if (Input.mousePosition.x < panBorderThickness)
+            {
+                pos.x -= panSpeed * Time.deltaTime;
+            }
+        }
+        else {
             pos.x -= panSpeed * Time.deltaTime;
         }
+        
 
-        pos.y = Mathf.Clamp(pos.y, -panLimit.y, panLimit.y);
+        pos.y = Mathf.Clamp(pos.y, panLimit.x, panLimit.y);
 
-        pos.x = Mathf.Clamp(pos.x, -panLimit.x, panLimit.x);
 
-        cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+        if (cam.orthographic)
+        {
+
+            if (cam.orthographicSize <= camOrthSizeMax && cam.orthographicSize >= camOrthSizeMin)
+            {
+                cam.orthographicSize -= Input.GetAxis("Mouse ScrollWheel") * zoomSpeed;
+            }
+            else if (cam.orthographicSize <= camOrthSizeMin)
+            {
+                cam.orthographicSize = camOrthSizeMin + 0.1f;
+            }
+            else if (cam.orthographicSize >= camOrthSizeMax)
+            {
+                cam.orthographicSize = camOrthSizeMax - 0.1f;
+            }
+
+        }
 
         transform.position = pos;
     }

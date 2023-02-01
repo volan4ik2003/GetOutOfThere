@@ -3973,9 +3973,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   panSpeed: 20
   panBorderThickness: 10
-  panLimit: {x: 0, y: 80}
+  panLimit: {x: -12, y: 110}
   cam: {fileID: 519420031}
   zoomSpeed: 10
+  camOrthSizeMax: 67
+  camOrthSizeMin: 10
+  TopCamLimit: 120
+  downCamLimit: -20
+  leftCamLimit: -119
+  rightCamLimit: 125
 --- !u!1 &525005013
 GameObject:
   m_ObjectHideFlags: 0
