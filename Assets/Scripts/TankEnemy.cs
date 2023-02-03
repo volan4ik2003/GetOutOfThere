@@ -10,6 +10,8 @@ public class TankEnemy : MonoBehaviour
 
     private float timer;
     private bool IsOnPosition = false;
+    public Animator animator;
+
 
     void Update()
     {
@@ -26,7 +28,8 @@ public class TankEnemy : MonoBehaviour
     }
 
     private void Shoot()
-    { 
+    {
+        animator.Play("Tank_Shooting");
         Instantiate(bullet, bulletPos.position, Quaternion.identity);
     }
 
