@@ -35,7 +35,6 @@ public class TankEnemy : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             IsOnPosition = true;
-            Debug.Log("LOL");
             StartCoroutine(StopTank());
         }
     }
