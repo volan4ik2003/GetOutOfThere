@@ -9,20 +9,24 @@ public class GameRTSController : MonoBehaviour {
 
     private Vector3 startPosition;
     private List<UnitRTS> selectedUnitRTSList;
-
+    public GameObject Hit;
+    public int SelectedRTS;
     private void Awake() {
         selectedUnitRTSList = new List<UnitRTS>();
         selectionAreaTransform.gameObject.SetActive(false);
     }
 
-    private void Update() {
-        if (Input.GetMouseButtonDown(0)) {
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
             // Left Mouse Button Pressed
             selectionAreaTransform.gameObject.SetActive(true);
             startPosition = UtilsClass.GetMouseWorldPosition();
         }
 
-        if (Input.GetMouseButton(0)) {
+        if (Input.GetMouseButton(0))
+        {
             // Left Mouse Button Held Down
             Vector3 currentMousePosition = UtilsClass.GetMouseWorldPosition();
             Vector3 lowerLeft = new Vector3(
@@ -37,7 +41,8 @@ public class GameRTSController : MonoBehaviour {
             selectionAreaTransform.localScale = upperRight - lowerLeft;
         }
 
-        if (Input.GetMouseButtonUp(0)) {
+        if (Input.GetMouseButtonUp(0))
+        {
             // Left Mouse Button Released
             selectionAreaTransform.gameObject.SetActive(false);
 
@@ -51,41 +56,41 @@ public class GameRTSController : MonoBehaviour {
             selectedUnitRTSList.Clear();
 
             // Select Units within Selection Area
-            foreach (Collider2D collider2D in collider2DArray) {
+            foreach (Collider2D collider2D in collider2DArray)
+            {
                 UnitRTS unitRTS = collider2D.GetComponent<UnitRTS>();
-                if (unitRTS != null) {
+                if (unitRTS != null)
+                {
                     unitRTS.SetSelectedVisible(true);
                     selectedUnitRTSList.Add(unitRTS);
                 }
             }
-
-            Debug.Log(selectedUnitRTSList.Count);
         }
 
-        if (Input.GetMouseButtonDown(1)) {
+        if (Input.GetMouseButtonDown(1))
+        {
             // Right Mouse Button Pressed 
 
             Vector2 screenPosition = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
             Vector2 worldPosition = Camera.main.ScreenToWorldPoint(screenPosition);
 
-           
-
-            
             foreach (UnitRTS unitRTS in selectedUnitRTSList)
             {
-                 unitRTS.lightningBolt.endPoint = worldPosition;
-                 unitRTS.lightningBolt.FireOnce();
+                unitRTS.lightningBolt.endPoint = worldPosition;
+                unitRTS.lightningBolt.FireOnce();
             }
+
+
+            SelectedRTS = selectedUnitRTSList.Count;
+            Instantiate(Hit, worldPosition, Quaternion.identity);
+
             //Vector3 moveToPosition = UtilsClass.GetMouseWorldPosition();
 
             //List<Vector3> targetPositionList = GetPositionListAround(moveToPosition, new float[] { 10f, 20f, 30f }, new int[] { 5, 10, 20 });
 
             //int targetPositionListIndex = 0;
-
-
         }
     }
-
     private List<Vector3> GetPositionListAround(Vector3 startPosition, float[] ringDistanceArray, int[] ringPositionCountArray) {
         List<Vector3> positionList = new List<Vector3>();
         positionList.Add(startPosition);

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class TankBullet : MonoBehaviour
+public class SoldierBullet : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;

@@ -8,8 +8,10 @@ public class HelicopterBullet : MonoBehaviour
     private GameObject player;
     private Rigidbody2D rb;
     public float force;
+    public Health health;
     private void Start()
     {
+        health = FindObjectOfType<Health>();
         rb = GetComponent<Rigidbody2D>();
         player = GameObject.FindGameObjectWithTag("PlayerBodyHel");
 
@@ -20,7 +22,8 @@ public class HelicopterBullet : MonoBehaviour
     void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("PlayerBodyHel"))
-        { 
+        {
+            health.health -= 1;
             Destroy(gameObject);
         }
     }
