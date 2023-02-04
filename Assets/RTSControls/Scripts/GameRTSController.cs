@@ -11,7 +11,10 @@ public class GameRTSController : MonoBehaviour {
     private List<UnitRTS> selectedUnitRTSList;
     public GameObject Hit;
     public int SelectedRTS;
+    public AudioSource src;
+    public AudioClip attack;
     private void Awake() {
+        src = GetComponent<AudioSource>();
         selectedUnitRTSList = new List<UnitRTS>();
         selectionAreaTransform.gameObject.SetActive(false);
     }
@@ -83,7 +86,7 @@ public class GameRTSController : MonoBehaviour {
 
             SelectedRTS = selectedUnitRTSList.Count;
             Instantiate(Hit, worldPosition, Quaternion.identity);
-
+            src.PlayOneShot(attack);
             //Vector3 moveToPosition = UtilsClass.GetMouseWorldPosition();
 
             //List<Vector3> targetPositionList = GetPositionListAround(moveToPosition, new float[] { 10f, 20f, 30f }, new int[] { 5, 10, 20 });
