@@ -8,6 +8,10 @@ TagManager:
   - PlayerBody
   - PlayerBodyHel
   - WaveSpawner
+  - PlayerBodyPlane
+  - Enemy
+  - Health
+  - Hit
   layers:
   - Default
   - TransparentFX

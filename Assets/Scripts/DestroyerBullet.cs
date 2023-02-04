@@ -3,17 +3,15 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class SoldierBullet : MonoBehaviour
+public class DestroyerBullet : MonoBehaviour
 {
     private GameObject player;
     private Rigidbody2D rb;
     public float force;
-    public Health health;
     private void Start()
     {
-        health = FindObjectOfType<Health>();
         rb = GetComponent<Rigidbody2D>();
-        player = GameObject.FindGameObjectWithTag("PlayerBody");
+        player = GameObject.FindGameObjectWithTag("PlayerBodyPlane");
 
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * force;
@@ -21,9 +19,8 @@ public class SoldierBullet : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.CompareTag("PlayerBody"))
+        if (other.gameObject.CompareTag("PlayerBodyPlane"))
         {
-            health.health -= 1;
             Destroy(gameObject);
         }
     }
