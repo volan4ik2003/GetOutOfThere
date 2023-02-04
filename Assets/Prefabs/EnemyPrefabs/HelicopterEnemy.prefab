@@ -43,7 +43,6 @@ GameObject:
   - component: {fileID: 6640744512714129188}
   - component: {fileID: 6640744512714129190}
   - component: {fileID: 6640744512714129189}
-  - component: {fileID: 8599697486956648342}
   - component: {fileID: 6443395324149260214}
   - component: {fileID: 3659190462280357514}
   m_Layer: 6
@@ -132,18 +131,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &8599697486956648342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6640744512714129210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed225d16579c4174481820d62e8ce157, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &6443395324149260214
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,6 +146,7 @@ MonoBehaviour:
   health: 600
   vfx: {fileID: 6827228111991816041, guid: 7f8a9c5032a3bed46a033dbd90dfcd7b, type: 3}
   vfxPos: {fileID: 2407202879483831030}
+  src: {fileID: 0}
   clip: {fileID: 8300000, guid: dcba7b5b60beb2e49870cb19c15b18cd, type: 3}
 --- !u!82 &3659190462280357514
 AudioSource:
