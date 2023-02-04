@@ -12,7 +12,21 @@ public class HelicopterEnemy : MonoBehaviour
     private bool IsOnPosition = false;
     void Start()
     {
-        currAngl = 0;
+        if (transform.position.y != 34.8)
+        {
+            transform.position = new Vector3(transform.position.x, 34.8f, transform.position.z);
+        }
+
+        if (transform.position.x > 0)
+        {
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            currAngl = 0;
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(0, -180, 0);
+            currAngl = -180;
+        }
     }
 
     
@@ -26,7 +40,10 @@ public class HelicopterEnemy : MonoBehaviour
             if (IsOnPosition)
                 Shoot();
         }
+
         transform.Translate(Vector2.left * speed * Time.deltaTime);
+
+        
     }
     private void Shoot()
     {
